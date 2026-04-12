@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import "./globals.css";
+import './globals.css'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -9,7 +9,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Phoenix',
-  description: 'Expense tracker application using Next JS 16, Tailwind 4, Shadcn and Firebase',
+  description: 'Expense tracker application using Next and Firebase',
 }
 
 export default function RootLayout({
@@ -18,10 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={poppins.className}>
         {children}
       </body>
     </html>
-  );
+  )
 }
