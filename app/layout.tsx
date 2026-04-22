@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import Link from 'next/link'
+import { AuthProvider } from '@/context/auth'
+import AuthButtons from './auth-buttons'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,7 +23,19 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={poppins.className}>
-        {children}
+        <AuthProvider>
+          <nav className='bg-primary text-light p-5 h-24 flex items-center justify-between'>
+            <Link href='/'>
+              Phoenix
+            </Link>
+            <ul>
+              <li>
+                <AuthButtons />
+              </li>
+            </ul>
+          </nav>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

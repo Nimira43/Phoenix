@@ -16,7 +16,14 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		colors: {
+			colors: {
+				'dark': '#111',
+				'light': '#fbfffa',
+				'grey-1': '#333',
+				'grey-2': '#999',
+				'grey-3': '#ccc',
+				'grey-4': '#eee',
+				'grey-5': '#fafafa',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
