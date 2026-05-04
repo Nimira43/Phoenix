@@ -17,6 +17,8 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 			colors: {
+				'support': '#e2c002',
+				'support-hover': '#f8db39',
 				'dark': '#111',
 				'light': '#fbfffa',
 				'grey-1': '#333',

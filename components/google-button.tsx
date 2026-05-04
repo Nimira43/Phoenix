@@ -10,8 +10,9 @@ export default function GoogleButton() {
       onClick={() => {
         auth?.loginWithGoogle()
       }}
+      className='w-full'
     >
-      Login with Google
+      Continue with Google
     </Button>
   )
 }

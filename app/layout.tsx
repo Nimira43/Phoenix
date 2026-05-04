@@ -25,10 +25,21 @@ export default function RootLayout({
       <body className={poppins.className}>
         <AuthProvider>
           <nav className='bg-primary text-light p-5 h-24 flex items-center justify-between'>
-            <Link href='/'>
+            <Link
+              href='/'
+              className='text-3xl logo-font'
+            >
               Phoenix
             </Link>
-            <ul>
+            <ul className='flex gap-6 items-center'>
+              <li>
+                <Link
+                  href='/property-search'
+                  className='hover:text-support-hover transitioning'
+                >
+                  Search
+                </Link>
+              </li>
               <li>
                 <AuthButtons />
               </li>
