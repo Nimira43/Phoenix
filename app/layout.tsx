@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import Link from 'next/link'
 import { AuthProvider } from '@/context/auth'
-import AuthButtons from './auth-buttons'
+import AuthButtons from '@/components/auth-buttons'
 
 const poppins = Poppins({
   subsets: ['latin'],
