@@ -4,6 +4,7 @@ import './globals.css'
 import Link from 'next/link'
 import { AuthProvider } from '@/context/auth'
 import AuthButtons from '@/components/auth-buttons'
+import { Toaster } from '@/components/ui/sonner'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -46,6 +47,10 @@ export default function RootLayout({
             </ul>
           </nav>
           {children}
+          <Toaster
+            richColors
+            closeButton
+          />
         </AuthProvider>
       </body>
     </html>
