@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { getProperties } from '@/data/properties'
 import Link from 'next/link'
+import { TbPencil } from 'react-icons/tb'
 
 export default async function PropertiesTable({
   page = 1
@@ -60,7 +61,16 @@ export default async function PropertiesTable({
                     {property.status}
                   </TableCell>
                   <TableCell>
-                    VIEW / EDIT
+                    <span>VIEW</span>
+                    <Button
+                      asChild
+                      variant='outline'
+                      size='sm'
+                    >
+                      <Link href={`/admin-dashboard/edit/${property.id}`}>
+                        <TbPencil />
+                      </Link>
+                    </Button>
                   </TableCell>
                 </TableRow>
               )
