@@ -2,7 +2,8 @@ import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { getProperties } from '@/data/properties'
 import Link from 'next/link'
-import { TbPencil } from 'react-icons/tb'
+import { TbEye, TbPencil } from 'react-icons/tb'
+import numeral from 'numeral'
 
 export default async function PropertiesTable({
   page = 1
@@ -55,13 +56,21 @@ export default async function PropertiesTable({
                     {address}
                   </TableCell>
                   <TableCell>
-                    {property.price}
+                    £{numeral(property.price).format('0,0')}
                   </TableCell>
                   <TableCell>
                     {property.status}
                   </TableCell>
-                  <TableCell>
-                    <span>VIEW</span>
+                  <TableCell className='flex justify-end g ap-1'>
+                    <Button
+                      asChild
+                      variant='outline'
+                      size='sm'
+                    >
+                      <Link href={`/property/${property.id}`}>
+                        <TbEye />
+                      </Link>
+                    </Button>
                     <Button
                       asChild
                       variant='outline'
