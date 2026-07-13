@@ -4,6 +4,7 @@ import { getProperties } from '@/data/properties'
 import Link from 'next/link'
 import { TbEye, TbPencil } from 'react-icons/tb'
 import numeral from 'numeral'
+import PropertyStatusBadge from '@/components/property-status-badge'
 
 export default async function PropertiesTable({
   page = 1
@@ -59,9 +60,11 @@ export default async function PropertiesTable({
                     £{numeral(property.price).format('0,0')}
                   </TableCell>
                   <TableCell>
-                    {property.status}
+                    <PropertyStatusBadge
+                      status={property.status}
+                    />
                   </TableCell>
-                  <TableCell className='flex justify-end g ap-1'>
+                  <TableCell className='flex justify-end gap-1'>
                     <Button
                       asChild
                       variant='outline'
@@ -95,8 +98,9 @@ export default async function PropertiesTable({
                   .from({ length: totalPages })
                   .map((_, i) => (
                     <Button
+                      disabled={page === i + 1}
                       key={i}
-                      asChild
+                      asChild={page !== i + 1}
                       variant='outline'
                       className='mx-1'
                     >
