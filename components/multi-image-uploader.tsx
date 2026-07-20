@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import { Button } from './ui/button'
 
 export type ImageUpload = {
@@ -15,10 +15,25 @@ type Props = {
 }
 
 export default function MultiImageUploader({
-  images,
+  images = [],
   onImagesChange
 }: Props) {
   const uploadInputRef = useRef<HTMLInputElement | null>(null)
+  
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    console.log({ files })
+    const newImages = files.map((file, index) => {
+      return {
+        id: `${Date.now()}-${index}-${file.name}`,
+        url: URL.createObjectURL(file),
+        file
+      }
+    })
+
+    onImagesChange([...images, ...newImages])
+  }
+  
   return (
     <div className='w-full max-w-3xl mx-auto p-4'>
       <input
@@ -27,6 +42,7 @@ export default function MultiImageUploader({
         type='file'
         multiple
         accept='image/*'   
+        onChange={handleInputChange}
       />
       <Button
         type='button'
