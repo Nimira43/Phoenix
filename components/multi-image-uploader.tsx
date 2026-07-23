@@ -19,10 +19,10 @@ export default function MultiImageUploader({
   onImagesChange
 }: Props) {
   const uploadInputRef = useRef<HTMLInputElement | null>(null)
+  console.log({images})
   
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
-    console.log({ files })
     const newImages = files.map((file, index) => {
       return {
         id: `${Date.now()}-${index}-${file.name}`,

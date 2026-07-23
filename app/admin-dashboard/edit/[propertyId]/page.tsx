@@ -12,7 +12,7 @@ export default async function EditProperty({
   const property = await getPropertyById(paramsValue.propertyId)
   console.log(property)
   return (
-    <div>
+    <>
       <Breadcrumbs
         items={[
           {
@@ -45,6 +45,6 @@ export default async function EditProperty({
           />
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
