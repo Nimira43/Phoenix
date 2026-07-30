@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useRef } from 'react'
 import { Button } from './ui/button'
-import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
+import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
 import Image from 'next/image'
 import { Badge } from './ui/badge'
 import { RxCross2 } from 'react-icons/rx'
@@ -38,7 +38,22 @@ export default function MultiImageUploader({
 
     onImagesChange([...images, ...newImages])
   }
+
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+    const items = Array.from(images)
+    const [reorderedImages] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedImages)
+    onImagesChange(items)
+  }
   
+  const handleDelete = (id: string) => {
+    const updatedImages = images.filter((image) => image.id !== id)
+    onImagesChange(updatedImages)
+  }
+
   return (
     <div className='w-full max-w-3xl mx-auto p-4'>
       <input
@@ -59,7 +74,7 @@ export default function MultiImageUploader({
       >
         Upload Images
       </Button>
-      <DragDropContext onDragEnd={() => {}}>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable
           droppableId='property-images'
           direction='vertical'
@@ -103,7 +118,10 @@ export default function MultiImageUploader({
                         </div>
                         <div className='flex items-center p-2'>
                           <button>
-                            <RxCross2 className='text-primary text-2xl'/>
+                            <RxCross2
+                              className='text-primary text-2xl'
+                              onClick={() => handleDelete(image.id)}
+                            />
                           </button>
                           <div className='pl-2'>
                             <SlCursorMove />
