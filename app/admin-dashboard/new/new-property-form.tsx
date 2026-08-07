@@ -4,7 +4,7 @@ import PropertyForm from '@/components/property-form'
 import { useAuth } from '@/context/auth'
 import { propertySchema } from '@/validation/propertySchema'
 import { z } from 'zod'
-import { createProperty } from './actions'
+import { createProperty, savePropertyImages } from './actions'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { ref, uploadBytesResumable, UploadTask } from 'firebase/storage'
@@ -24,7 +24,7 @@ export default function NewPropertyForm() {
     const {images, ...rest} = data
     const response = await createProperty(rest, token)
 
-    if (!!response.error) {
+    if (!!response.error || !response.propertyId) {
       toast.error('Error', {
         description: response.error
       })
@@ -45,7 +45,10 @@ export default function NewPropertyForm() {
     
     await Promise.all(uploadTasks)
 
-    
+    await savePropertyImages({
+      propertyId: response.propertyId,
+      images: paths
+    }, token)    
 
     toast.success('Success', {
       description: 'Property created.'
