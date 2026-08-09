@@ -240,6 +240,12 @@ export default function PropertyForm({
                     }
                   }
                   images={field.value}
+                  urlFormatter={(image) => {
+                    if (!image.file) {
+                      return `https://firebasestorage.googleapis.com/v0/b/phoenix-620c9.firebasestorage.app/o/${encodeURIComponent(image.url)}?alt=media`
+                    }
+                    return image.url
+                  }}
                 />                
               </FormControl>
               <FormMessage />
