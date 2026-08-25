@@ -4,6 +4,9 @@ import { getPropertyById } from '@/data/properties'
 import numeral from 'numeral'
 import ReactMarkdown from 'react-markdown'
 import { LiaBathSolid, LiaBedSolid } from 'react-icons/lia'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import Image from 'next/image'
+import BackButton from './back-button'
 
 export default async function Property({
   params,
@@ -25,10 +28,32 @@ export default async function Property({
   return (
     <div className='grid grid-cols-[1fr_500px]'>
       <div>
+        {!!property.images &&
+          <Carousel className='w-full'>
+            <CarouselContent>
+              {property.images.map((image, index) => (
+                <CarouselItem key={image}>
+                  <div className='relative h-[80vh] min-h-80'>
+                    <Image 
+                      src={`https://firebasestorage.googleapis.com/v0/b/phoenix-620c9.firebasestorage.app/o/${encodeURIComponent(image)}?alt=media`}
+                      alt={`Image ${index + 1}`}
+                      fill
+                      className='object-cover'
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {property.images.length > 1 &&
+              <>
+                <CarouselPrevious className='translate-x-24' />
+                <CarouselNext className='-translate-x-24' />
+              </>
+            }
+          </Carousel>
+        }
         <div className='property-description max-w-screen-md mx-auto py-10 px-4'>
-          <Button>
-            Back
-          </Button>
+          <BackButton />
           <ReactMarkdown>
             {property.description}
           </ReactMarkdown>
@@ -54,7 +79,7 @@ export default async function Property({
           <div className='flex gap-10'>
             <div className='flex gap-2 item-center'>
               <LiaBedSolid className='text-xl' /> {property.bedrooms} Bedrooms
-              <LiaBathSolid className='text-xl'/> {property.bathrooms} Bathrooms
+              <LiaBathSolid className='text-xl'/ > {property.bathrooms} Bathrooms
             </div>
           </div>
         </div>
