@@ -1,5 +1,4 @@
 import PropertyStatusBadge from '@/components/property-status-badge'
-import { Button } from '@/components/ui/button'
 import { getPropertyById } from '@/data/properties'
 import numeral from 'numeral'
 import ReactMarkdown from 'react-markdown'
